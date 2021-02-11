@@ -16,7 +16,12 @@ axios.request(options).then(function (response) {
 }).catch(function (error) {
 	console.error(error);
 });
-console.log(options);
+let result = Object.keys(options).reduce(function (r, k) {
+  return r.concat(k, options[k]);
+}, []);
+
+console.log(result);
+
 class App extends Component {
 
   constructor(props) {
