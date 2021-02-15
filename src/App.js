@@ -41,17 +41,17 @@ class App extends Component {
       return <div>Chargement…</div>;
     }
     else {
-          const current = items["The Boomsday Project"][301];
-
+      const cards = items["The Boomsday Project"];
+    
       return (
         <div className="App">
           {
-            <div>
-              <Card
-                {...current}
-            />
-
-            </div>
+            <ul>{
+              cards.map((card, i)=>{
+                console.log('test')
+                return <Card {...card} />
+              })}
+            </ul>
           }
         </div>
       );
