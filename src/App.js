@@ -10,6 +10,8 @@ const options = {
   }
 };
 
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -31,16 +33,25 @@ class App extends Component {
   }
   
   render() {
+    
     let { isLoaded, items } = this.state;
+
     console.log(items)
     if (!isLoaded) {
       return <div>Chargement…</div>;
     }
     else {
+          const current = items["The Boomsday Project"][301];
+
       return (
         <div className="App">
           {
-            <Card name={items["Ashes of Outland"][0].name}></Card>
+            <div>
+              <Card
+                {...current}
+            />
+
+            </div>
           }
         </div>
       );
