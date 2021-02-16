@@ -1,0 +1,25 @@
+body{
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+}
+.cards{
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr;
+    width: 80vw;
+}
+/* texte card */
+.card{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    width: 325px;
+    height: 480px;
+    margin: 5px;
+}
+
+.card b{
+    color: blue;
+}

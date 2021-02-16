@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Card from './Card'
 import './App.css';
+import './Card.css';
 
 const options = {
   method: 'GET',
@@ -41,12 +42,12 @@ class App extends Component {
       return <div>Chargement…</div>;
     }
     else {
-      const cards = items["The Boomsday Project"];
+      const cards = items["Whispers of the Old Gods"];
     
       return (
         <div className="App">
           {
-            <ul>{
+            <ul className="cards">{
               cards.map((card, i)=>{
                 console.log('test')
                 return <Card {...card} />
