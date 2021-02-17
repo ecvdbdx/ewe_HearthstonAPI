@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import Card from './Card'
-import Filters from './Filter'
+import Filter from './Filter'
 import './App.css';
 import './Card.css';
 
@@ -20,54 +20,64 @@ class App extends Component {
     this.state = {
       items: {},
       isLoaded: false,
-      selected: '',
+      checked: "Wild Event",
       data: undefined,
     };
-        this.select = this.select.bind(this);
+        this.check = this.check.bind(this);
   }
-  select(cardSet) {
+
+  check(cardSet) {
     this.setState(state => ({
-      selected: state.selected === cardSet ? '' : cardSet,
+      checked: state.checked === cardSet ? '' : cardSet,
     }));
   }
 
   componentDidMount() {
-    fetch('https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/sets/wild%20event', options)
+    fetch('https://omgvamp-hearthstone-v1.p.rapidapi.com/cards', options)
       .then(res => res.json())
       .then(json => {
         this.setState({
           isLoaded: true,
           items: json,
+          checked: "Wild Event"
         })
-      });
+      })
   }
   
   render() {
     
-    let { isLoaded, items } = this.state;
-      const cardSet = ["The Boomsday Project"];
+    let { isLoaded, items, checked } = this.state;
 
     console.log(items)
     if (!isLoaded) {
       return <div>
-        <input type="text" value=''></input>
-        
         Chargement…</div>;
     }
     else {
-       const cards = items["Wild Event"];
-      // const cards = items;
+      //  const cards = items[selected];
+      const cardSets = Object.keys(items)
+      const cards = Object.values(items).flat()
+      console.log(cardSets)
       return (
         <div className="App">
           {
-            <ul className="cards">{
-              cards.map((card, i)=>{
-                console.log('test')
-                return <Card {...card} />
-              })}
+            <ul className="cards">
+              {
+                cards.map(card =>
+                  <Card {...card} checked={checked} key={card.cardId}/>
+                )
+              }
             </ul>
           }
-        <Filters types={cardSet} select={this.select} />
+          {
+            <ul className="filters">
+              {
+                cardSets.map((cardSet, i) => {
+                  return <Filter cardSet={cardSet} key={cardSet} checked={checked} check={this.check} />
+                })
+              }
+            </ul>
+          }
         </div>
       );
     }
