@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import Card from './Card'
+import Filters from './Filter'
 import './App.css';
 import './Card.css';
 
@@ -19,11 +20,19 @@ class App extends Component {
     this.state = {
       items: {},
       isLoaded: false,
-    }
+      selected: '',
+      data: undefined,
+    };
+        this.select = this.select.bind(this);
+  }
+  select(cardSet) {
+    this.setState(state => ({
+      selected: state.selected === cardSet ? '' : cardSet,
+    }));
   }
 
   componentDidMount() {
-    fetch('https://omgvamp-hearthstone-v1.p.rapidapi.com/cards', options)
+    fetch('https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/sets/wild%20event', options)
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -36,14 +45,18 @@ class App extends Component {
   render() {
     
     let { isLoaded, items } = this.state;
+      const cardSet = ["The Boomsday Project"];
 
     console.log(items)
     if (!isLoaded) {
-      return <div>Chargement…</div>;
+      return <div>
+        <input type="text" value=''></input>
+        
+        Chargement…</div>;
     }
     else {
-      const cards = items["Whispers of the Old Gods"];
-    
+       const cards = items["Wild Event"];
+      // const cards = items;
       return (
         <div className="App">
           {
@@ -54,6 +67,7 @@ class App extends Component {
               })}
             </ul>
           }
+        <Filters types={cardSet} select={this.select} />
         </div>
       );
     }
