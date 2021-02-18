@@ -3,6 +3,7 @@ import Card from "./Card";
 import Filter from "./Filter";
 import "./App.css";
 import "./Card.css";
+import "./Filter.css";
 
 const options = {
   method: "GET",
@@ -54,13 +55,7 @@ class App extends Component {
       return (
         <div className="App">
           {
-            <div>
-              <ul className="cards">
-                {displayedCards.map((card) => (
-                  <Card {...card} checked={checked} key={card.cardId} />
-                ))}
-              </ul>
-
+            <div className="container">
               <ul className="filters">
                 {
                   <Filter
@@ -70,6 +65,11 @@ class App extends Component {
                     check={this.check}
                   />
                 }
+              </ul>
+              <ul className="cards">
+                {displayedCards.map((card) => (
+                  <Card {...card} key={card.cardId} />
+                ))}
               </ul>
             </div>
           }

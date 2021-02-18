@@ -9,6 +9,9 @@ body{
     display: grid;
     grid-template-columns:  1fr 1fr 1fr;
     width: 80vw;
+    overflow: scroll;
+    height: 100vh;
+
 }
 /* texte card */
 .card{
