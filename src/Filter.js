@@ -1,17 +1,22 @@
-import React from 'react'
+import React from "react";
 
-export default function Filter(props){
-    const { cardSet, checked, check} = props;
-    
-        return (
-            <ul>   
-                <li>
-                    {cardSet}
-                    <input type="checkbox" name={cardSet} checked={checked === cardSet} onChange={() => check(cardSet)}></input>
-                </li>
-                
-        </ul>
-    ) 
-    
-    
+function Filter(props) {
+  const { cardSets, checked, check } = props;
+
+  const filters = cardSets.map((cardSet) => (
+    <li>
+      {cardSet}
+      <input
+        type="checkbox"
+        name={cardSet}
+        checked={checked === cardSet}
+        onChange={() => check(cardSet)}
+        key={cardSet}
+      />
+    </li>
+  ));
+
+  return <ul>{filters}</ul>;
 }
+
+export default Filter;
